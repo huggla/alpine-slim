@@ -11,7 +11,8 @@ COPY --from=stage1 /rootfs /rootfs
 COPY --from=stage1 /rootfs /
 
 RUN apk add --initdb \
- && cp -a /lib/apk /rootfs/lib/
+ && cp -a /lib/apk /rootfs/lib/ \
+ && cp -a /etc/apk /rootfs/etc/
  
 FROM huggla/busybox:20180907-edge
 
