@@ -1,10 +1,10 @@
 FROM huggla/alpine-official:20180907-edge as stage1
 
-RUN apk --no-cache --quiet manifest musl busybox alpine-baselayout alpine-keys libressl2.7-libtls ssl_client zlib scanelf musl-utils libc-utils libressl2.7-libcrypto libressl2.7-libssl apk-tools | awk -F "  " '{print $2;}' > /apks_files.list \
+RUN apk --no-cache --quiet manifest libressl2.7-libcrypto libressl2.7-libssl apk-tools | awk -F "  " '{print $2;}' > /apks_files.list \
  && tar -cvp -f /apks_files.tar -T /apks_files.list -C / \
- && mkdir -p /rootfs/etc /rootfs/usr/share \
- && cp -a /etc/apk /rootfs/etc/ \
- && cp -a /usr/share/apk /rootfs/usr/share/ \
+ && mkdir -p /rootfs/etc/apk /rootfs/usr/share/apk \
+ && cp -a /etc/apk/repositories /rootfs/etc/apk/ \
+# && cp -a /usr/share/apk /rootfs/usr/share/ \
  && tar -xvp -f /apks_files.tar -C /rootfs/
  
 FROM huggla/busybox:20180907-edge as stage2
