@@ -4,7 +4,7 @@ RUN apk --no-cache --quiet manifest libressl2.7-libcrypto libressl2.7-libssl apk
  && tar -cvp -f /apks_files.tar -T /apks_files.list -C / \
  && mkdir -p /rootfs/etc/apk /rootfs/usr/share/apk /rootfs/var/cache/apk \
  && cp -a /etc/apk/repositories /rootfs/etc/apk/ \
- && cp -a /usr/share/apk/keys /rootfs/usr/share/apk/ \
+ && cp -a /etc/apk/keys /rootfs/etc/apk/ \
  && touch /rootfs/etc/apk/world \
  && tar -xvp -f /apks_files.tar -C /rootfs/
  
