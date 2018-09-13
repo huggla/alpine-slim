@@ -6,6 +6,7 @@ RUN apk --no-cache --quiet manifest libressl2.7-libcrypto libressl2.7-libssl apk
  && cp -a /etc/apk/repositories /etc/apk/keys /rootfs/etc/apk/ \
  && touch /rootfs/etc/apk/world \
  && tar -xvp -f /apks_files.tar -C /rootfs/ \
+ && cp -a /etc/* /rootfs/etc/ \
  && cp -a /lib/* /rootfs/lib/
  
 FROM huggla/busybox:20180907-edge as stage2
