@@ -25,4 +25,6 @@ FROM huggla/busybox:20180907-edge
 
 COPY --from=stage2 /rootfs /
 
-RUN find /lib | sort > /apa2
+RUN find /lib | sort > /apa2 \
+ && diff /apa1 /apa2 > /diff1 \
+ && diff /apa3 /apa4 > /diff2
