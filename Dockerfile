@@ -1,6 +1,7 @@
 FROM huggla/alpine-official:20180907-edge as stage1
 
-RUN apk --no-cache --quiet manifest libressl2.7-libcrypto libressl2.7-libssl apk-tools | awk -F "  " '{print $2;}' > /apks_files.list \
+RUN mkdir -p /rootfs/environment /rootfs/lib /rootfs/etc/sudoers.d /rootfs/usr/bin /rootfs/usr/local/bin /rootfs/bin /rootfs/sbin /rootfs/usr/bin /rootfs/usr/sbin \
+ && apk --no-cache --quiet manifest libressl2.7-libcrypto libressl2.7-libssl apk-tools | awk -F "  " '{print $2;}' > /apks_files.list \
  && tar -cvp -f /apks_files.tar -T /apks_files.list -C / \
  && rm -rf /lib/apk/db \
  && apk add --initdb \
