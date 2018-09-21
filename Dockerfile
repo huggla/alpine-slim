@@ -1,4 +1,4 @@
-FROM huggla/alpine-official as stage1
+FROM huggla/alpine-official:20180921-edge as stage1
 
 ARG APKS="libressl2.7-libcrypto libressl2.7-libssl apk-tools"
 
@@ -12,6 +12,6 @@ RUN apk --no-cache --quiet manifest $APKS | awk -F "  " '{print $2;}' > /apks_fi
  && cp -a /lib/apk/db /rootfs/lib/apk/ \
  && tar -xvp -f /apks_files.tar -C /rootfs/
  
-FROM huggla/busybox
+FROM huggla/busybox:20180921-edge
 
 COPY --from=stage1 /rootfs /
