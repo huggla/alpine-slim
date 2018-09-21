@@ -1,6 +1,8 @@
-FROM huggla/alpine-official:edge as stage1
+FROM huggla/alpine-official as stage1
 
-RUN apk --no-cache --quiet manifest libressl2.7-libcrypto libressl2.7-libssl apk-tools | awk -F "  " '{print $2;}' > /apks_files.list \
+ARG APKS="libressl2.7-libcrypto libressl2.7-libssl apk-tools"
+
+RUN apk --no-cache --quiet manifest $APKS | awk -F "  " '{print $2;}' > /apks_files.list \
  && tar -cvp -f /apks_files.tar -T /apks_files.list -C / \
  && rm -rf /lib/apk/db \
  && apk add --initdb \
