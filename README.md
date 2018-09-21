@@ -1,2 +1,2 @@
 # alpine-slim
-test
+Slim Alpine base image.
