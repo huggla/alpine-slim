@@ -1,4 +1,4 @@
-FROM huggla/alpine-official as stage1
+FROM huggla/alpine-official:20180921-edge as stage1
 
 ARG APKS="libressl2.7-libcrypto libressl2.7-libssl apk-tools"
 
