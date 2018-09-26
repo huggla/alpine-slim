@@ -24,9 +24,7 @@ RUN apk --no-cache --quiet manifest $APKS | awk -F "  " '{print $2;}' > /apks_fi
  && chmod ugo=rwx /rootfs/tmp \
  && cd /rootfs/var \
  && ln -s ../tmp tmp \
- && /rootfs/bin/busybox rm -rf /home /usr /var /root /tmp/* /media /mnt /run /sbin /srv /etc /bin/* || /rootfs/bin/busybox true \
- && /rootfs/bin/busybox cp -a /rootfs/bin/* /bin/ \
- && /rootfs/bin/busybox find /rootfs -type l -exec /rootfs/bin/busybox sh -c 'for x; do [ -e "$x" ] || /rootfs/bin/busybox rm "$x"; done' _ {} +
+ && find /rootfs -type l -exec sh -c 'for x; do [ -e "$x" ] || rm "$x"; done' _ {} +
 
 FROM scratch
  
