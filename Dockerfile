@@ -6,7 +6,7 @@ RUN apk --no-cache --quiet manifest $APKS | awk -F "  " '{print $2;}' > /apks_fi
  && tar -cvp -f /apks_files.tar -T /apks_files.list -C / \
  && rm -rf /lib/apk/db \
  && apk add --initdb \
- && mkdir -p /rootfs/rootfs/lib /rootfs/rootfs/etc /rootfs/etc/apk /rootfs/lib/apk /rootfs/var/cache/apk /rootfs/bin /rootfs/sbin /rootfs/usr/bin /rootfs/usr/sbin /rootfs/usr/local/bin /rootfs/tmp /rootfs/run \
+ && mkdir -p /rootfs/rootfs/lib /rootfs/rootfs/etc /rootfs/rootfs/usr/local/bin /rootfs/etc/apk /rootfs/lib/apk /rootfs/var/cache/apk /rootfs/bin /rootfs/sbin /rootfs/usr/bin /rootfs/usr/sbin /rootfs/usr/local/bin /rootfs/tmp /rootfs/run \
  && cp -a /etc/apk/repositories /etc/apk/keys /rootfs/etc/apk/ \
  && touch /rootfs/etc/apk/world \
  && cp -a /lib/apk/db /rootfs/lib/apk/ \
