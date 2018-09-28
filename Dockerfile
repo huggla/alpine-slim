@@ -34,4 +34,6 @@ FROM scratch
  
 COPY --from=stage1 /rootfs /
 
+ONBUILD ARG APKS
+
 ONBUILD RUN apk --no-cache --root /rootfs add $APKS
