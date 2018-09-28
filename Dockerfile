@@ -45,7 +45,8 @@ ONBUILD COPY --from=stage2 / /
 
 ONBUILD COPY ./rootfs /rootfs
 
-ONBUILD RUN echo $ADDREPOS >> /etc/apk/repositories \
+ONBUILD RUN rm -f /Dockerfile \
+         && echo $ADDREPOS >> /etc/apk/repositories \
          && apk --no-cache --root /rootfs --virtual .rundeps add $RUNDEPS \
          && apk --no-cache --root /rootfs --allow-untrusted --virtual .rundeps_testing add $RUNDEPS_TESTING \
          && apk --no-cache --virtual .builddeps add $BUILDDEPS \
