@@ -34,4 +34,17 @@ FROM scratch
  
 COPY --from=stage1 /rootfs /
 
-ONBUILD RUN apk --no-cache --root /rootfs add $APKS
+ONBUILD ARG ADDREPOS
+ONBUILD ARG RUNDEPS
+ONBUILD ARG RUNDEPS_TESTING
+ONBUILD ARG BUILDDEPS
+ONBUILD ARG BUILDDEPS_TESTING
+ONBUILD ARG RUNCMDS
+
+
+ONBUILD RUN echo $ADDREPOS >> /etc/apk/repositories \
+         && apk --no-cache --root /rootfs --virtual .rundeps add $RUNDEPS \
+         && apk --no-cache --root /rootfs --allow-untrusted --virtual .rundeps_testing add $RUNDEPS_TESTING \
+         && apk --no-cache --virtual .builddeps add $BUILDDEPS \
+         && apk --no-cache --allow-untrusted --virtual .builddeps_testing add $BUILDDEPS_TESTING \
+         && $RUNCMDS
