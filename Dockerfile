@@ -40,10 +40,8 @@ ONBUILD ARG RUNDEPS_TESTING
 ONBUILD ARG BUILDDEPS
 ONBUILD ARG BUILDDEPS_TESTING
 ONBUILD ARG RUNCMDS
-ONBUILD ARG COPYFROM
-ONBUILD ARG COPYPATH
 
-ONBUILD COPY --from=0 ${COPYPATH:-./Dockerfile} /rootfs
+ONBUILD COPY --from=scratch / /
 
 ONBUILD COPY ./rootfs /rootfs
 
@@ -52,6 +50,5 @@ ONBUILD RUN echo $ADDREPOS >> /etc/apk/repositories \
          && apk --no-cache --root /rootfs --allow-untrusted --virtual .rundeps_testing add $RUNDEPS_TESTING \
          && apk --no-cache --virtual .builddeps add $BUILDDEPS \
          && apk --no-cache --allow-untrusted --virtual .builddeps_testing add $BUILDDEPS_TESTING \
-         && echo $RUNCMDS \
          && eval "$RUNCMDS"
 
