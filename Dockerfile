@@ -43,7 +43,7 @@ ONBUILD ARG RUNCMDS
 ONBUILD ARG COPYFROM
 ONBUILD ARG COPYPATH
 
-ONBUILD COPY --from=${COPYFROM} ${COPYPATH:-./Dockerfile} /rootfs
+ONBUILD COPY --from=${COPYFROM:-0} ${COPYPATH:-./Dockerfile} /rootfs
 
 ONBUILD COPY ./rootfs /rootfs
 
