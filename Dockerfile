@@ -48,6 +48,6 @@ ONBUILD RUN echo $ADDREPOS >> /etc/apk/repositories \
          && apk --no-cache --root /rootfs --allow-untrusted --virtual .rundeps_testing add $RUNDEPS_TESTING \
          && apk --no-cache --virtual .builddeps add $BUILDDEPS \
          && apk --no-cache --allow-untrusted --virtual .builddeps_testing add $BUILDDEPS_TESTING \
-         && echo $RUNDEPS \
+         && echo $RUNCMDS \
          && $RUNCMDS
 
