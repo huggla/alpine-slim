@@ -41,6 +41,7 @@ ONBUILD ARG BUILDDEPS
 ONBUILD ARG BUILDDEPS_TESTING
 ONBUILD ARG RUNCMDS
 
+ONBUILD COPY ./rootfs /rootfs
 
 ONBUILD RUN echo $ADDREPOS >> /etc/apk/repositories \
          && apk --no-cache --root /rootfs --virtual .rundeps add $RUNDEPS \
@@ -48,3 +49,4 @@ ONBUILD RUN echo $ADDREPOS >> /etc/apk/repositories \
          && apk --no-cache --virtual .builddeps add $BUILDDEPS \
          && apk --no-cache --allow-untrusted --virtual .builddeps_testing add $BUILDDEPS_TESTING \
          && $RUNCMDS
+
