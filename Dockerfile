@@ -24,8 +24,7 @@ RUN apk --no-cache --quiet manifest $APKS | awk -F "  " '{print $2;}' > /apks_fi
  && chmod ugo=rwx /rootfs/tmp \
  && cd /rootfs/var \
  && ln -s ../tmp tmp \
- && cd /rootfs/rootfs/lib \
- && ln -s ../../lib/apk apk \
+ && cp -a /rootfs/lib/apk /rootfs/rootfs/lib/ \
  && cd /rootfs/rootfs/etc \
  && ln -s ../../etc/apk apk \
  && find /rootfs -type l -exec sh -c 'for x; do [ -e "$x" ] || rm "$x"; done' _ {} +
