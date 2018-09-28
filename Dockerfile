@@ -33,3 +33,5 @@ RUN apk --no-cache --quiet manifest $APKS | awk -F "  " '{print $2;}' > /apks_fi
 FROM scratch
  
 COPY --from=stage1 /rootfs /
+
+ONBUILD RUN apk --no-cache --root /rootfs add $APKS
